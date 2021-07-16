@@ -1,0 +1,489 @@
+// Variables
+$mainPadding: 130px;
+$colorOne:   hsl(217, 28%, 15%);
+$colorTwo:   hsl(218, 28%, 13%);
+$colorThree: hsl(216, 53%, 9%);
+$colorFour:  hsl(219, 30%, 18%);
+$colorFive:  hsl(176, 68%, 64%);
+$colorSix:   hsl(198, 60%, 50%);
+$colorSeven: hsl(0, 100%, 63%);
+$colorEight: hsl(0, 0%, 100%);
+$colorNine:  hsla(0, 0%, 100%, 0.7);
+
+//Mixins
+@mixin alignCenter($justifyContent, $alignItems, $flexDirection) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-direction: $flexDirection
+}
+
+// Global
+* {
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+  font-family: "Open Sans";
+  font-family: "Raleway";
+  color: $colorEight;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background-color: $colorOne;
+}
+
+// Style
+// Menu Section
+.menu {
+  padding-top: 3rem;
+  
+  .row {
+    @include alignCenter(space-between, auto, auto);
+    
+    .logo {
+      min-width: 106px;
+  
+      img {
+        max-width: 100%;
+      }
+  
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  
+    .menu-items {
+      ul {
+        @include alignCenter(space-evenly, center, auto);
+        list-style: none;
+        padding: 0%;
+  
+        li {
+          font-weight: lighter;
+  
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) { // Media Queries
+  .menu {
+    .logo {
+      width: auto !important;
+    }
+  }
+}
+
+// Header Section
+.header {
+  padding-top: ($mainPadding - 50px);
+  padding-bottom: $mainPadding;
+
+  .image {
+    @include alignCenter(center, center, auto);
+    padding-bottom: 20px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .info {
+    text-align: center;
+
+    h3 {
+      padding-bottom: 25px;
+      font-weight: 700;
+      font-size: 35px;
+    }
+
+    p {
+      padding-bottom: 5px;
+      font-size: 17px;
+      color: $colorNine;
+    }
+
+    button {
+      padding: 10px 70px;
+      background-color: $colorFive;
+      background-image: linear-gradient(90deg, $colorFive, $colorSix);
+    }
+  }
+}
+
+// Featurse Section
+.features {
+  padding-bottom: $mainPadding;
+  background-color: $colorTwo;
+  position: relative;
+
+  .curve {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    transform: translateY(-100%);
+
+    img {
+      width: 100%;
+    }
+  }
+
+  $features: "files" "security" "collaboration" "store";
+
+  @each $feature in $features {
+    .#{$feature} {
+      @include alignCenter(center, center, column);
+    }
+  }
+
+  .image {
+    padding-bottom: 25px;
+  }
+
+  .info {
+    text-align: center;
+
+    h4 {
+      font-weight: bold;
+    }
+
+    p {
+      color: $colorNine;
+    }
+  }
+}
+
+@media (min-width: 768px) { // Media Queries
+  .features {
+    $features: "files" "security";
+
+    @each $feature in $features {
+      .#{$feature}
+        .info {
+          padding-bottom: 25px;
+      }
+    }
+  }
+}
+
+// Work Section
+.work {
+  padding-bottom: $mainPadding;
+  background-color: $colorTwo;
+
+  .image {
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .info {
+    @include alignCenter(center, auto, column);
+
+    h3 {
+      font-size: 35px;
+      font-weight: bold;
+      padding-bottom: 30px;
+    }
+
+    p {
+      color: $colorNine;
+    }
+
+    .link {
+      @include alignCenter(flex-start, auto, auto);
+
+      .image {
+        width: 20px;
+        
+        img {
+          width: 100%;
+        }
+      }
+
+      a {
+        color: $colorFive;
+        text-decoration: none;
+        position: relative;
+        padding-right: 5px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 1px;
+          width: 100%;
+          background-color: $colorFive;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) { // Media Queries
+  .work {
+    padding-bottom: $mainPadding;
+
+    .info {
+      h3 {
+        font-size: 18px;
+        padding-top: 50px;
+        padding-bottom: 19px;
+      }
+    }
+  }
+}
+
+// Testemonials Section
+.testemonials {
+  padding-bottom: $mainPadding;
+  background-color: $colorTwo;
+  position: relative;
+  z-index: 2;
+
+  .test {
+    padding: 3rem 2.5rem 1.5rem 2.5rem;
+    background-color: $colorFour;
+    border-radius: 7px;
+    
+    .info {
+      @include alignCenter(auto, center, auto);
+      padding-top: 20px;
+
+      .person {
+        width: 50px;
+        margin-right: 10px;
+
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+
+      .text {
+        span {
+          font-weight: bold;
+        }
+
+        p {
+          color: $colorNine;
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  .test:nth-child(1) {
+    position: relative;
+
+    .qoute {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-20%, -65%);
+      z-index: -1;
+    }
+  }
+
+  .test:nth-child(2) {
+    margin: 0 35px;
+  }
+}
+
+@media (max-width: 768px) { // Media Queries
+  .test:nth-child(2) {
+    margin: 20px 0 !important;
+  }
+}
+
+// Email Section
+.e-mail {
+  padding-bottom: ($mainPadding - 50px);
+  background-image: linear-gradient(180deg, $colorTwo, 
+                                            $colorTwo 45%, 
+                                            $colorThree 45%, 
+                                            $colorThree 100%
+                                            );
+
+  .container {
+    max-width: 800px;
+
+    .email-content {
+      padding: 2.5rem 3rem 2.5rem 2.5rem;
+      background-color: $colorFour;
+      border-radius: 7px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  
+      .heading {
+        text-align: center;
+  
+        h3 {
+          font-size: 30px;
+          font-weight: bold;
+          padding-bottom: 25px;
+        }
+  
+        p {
+          color: $colorNine;
+          padding-bottom: 10px;
+        }
+      }
+  
+      .form {
+        width: 100%;
+  
+        .input {
+          input {
+            color: #777;
+            font-size: 17px;
+          }
+          
+          .danger-msg {
+            padding-left: 20px;
+            padding-top: 5px
+          }
+        }
+  
+        .sum {
+          .btn {
+            width: 100%;
+            font-size: 17px;
+            background-image: linear-gradient(90deg, $colorFive, $colorSix);
+
+            &:hover {
+              background-image: linear-gradient(90deg, $colorFive);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Footer Section
+  .footer {
+    background-color: $colorThree;
+    padding-bottom: 30px;
+    color: $colorNine;
+
+    .logo {
+      width: 150px;
+
+      img {
+        max-width: 100%
+      }
+    }
+
+    .location {
+      @include alignCenter(center, flex-start, auto);
+
+      .para {
+        padding-left: 10px;
+
+        p {
+          color: $colorNine;
+        }
+      }
+    }
+
+    .contact {
+      .phone {
+        @include alignCenter(auto, center, auto);
+        padding-bottom: 10px;
+
+        .text {
+          color: $colorNine;
+        }
+
+        .icon {
+          padding-right: 30px;
+        }
+      }
+    }
+
+    .email {
+      @include alignCenter(auto, center, auto);
+      padding-bottom: 10px;
+
+      .text {
+        color: $colorNine;
+      }
+
+      .icon {
+        padding-right: 10px;
+      }
+    }
+
+    .info {
+      ul {
+        list-style: none;
+        padding: 0;
+
+        a {
+          text-decoration: none;
+
+          li {
+            color: $colorNine;
+            padding-bottom: 10px;
+  
+            &:hover {
+              font-weight: bold;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+      .about {
+        ul {
+          list-style: none;
+          padding: 0;
+
+          a {
+            text-decoration: none;
+
+            li {
+              color: $colorNine;
+              padding-bottom: 10px;
+    
+              &:hover {
+                font-weight: bold;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+
+    .social {
+      @include alignCenter(space-evenly, auto, auto);
+      padding-left: 50px;
+
+      a {
+        i {
+          font-size: 20px;
+          color: $colorNine;
+          padding: 10px;
+          border-radius: 50%;
+          border: 1px solid $colorNine;
+        }
+
+        &:hover {
+          i {
+            color: $colorFive;
+            border-color: $colorFive;
+          }
+        }
+      }
+    }
+  }
